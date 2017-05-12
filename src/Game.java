@@ -17,13 +17,12 @@ public class Game {
         Scanner in = new Scanner(System.in);
         String name = in.nextLine();
 
-        map = new Map(20, 40);
+        map = new Map(30, 60);
 
         player = new Player(name, 10, map.genRndPos(), "Player", "@" );
 
         enemies = new ArrayList<Rat>();
         enemies.add(Rat.spawn(map, enemies.size()));
-        //enemies.add(new Rat("Rat01", 100, new Vec2d(10, 10), "Enemy", "r"));
 
         clear();
         map.render(player, enemies);

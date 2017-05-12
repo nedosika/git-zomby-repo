@@ -31,12 +31,12 @@ public class Map {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 if ( player.position.equals( new Vec2d(i, j) ) ) {
-                    map[i][j] = player.sprite;
+                    map[i][j] = (char)27 + "[32m" + player.sprite  + (char)27 + "[0m";
                 }
 
                 for (Rat enemy: enemies) {
                     if (enemy.position.equals(new Vec2d(i,j))){
-                        map[i][j] = enemy.sprite;
+                        map[i][j] = (char)27 + "[31m" + enemy.sprite  + (char)27 + "[0m";
                     }
                 }
 
