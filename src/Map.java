@@ -9,7 +9,12 @@ public class Map {
         map = new String[x][y];
         for (int i = 0; i < x; i++){
             for (int j = 0; j < y; j++) {
-                map[i][j] = "#";
+                if (Math.random() > 0.8){
+                    map[i][j] = "#";
+                }
+                else{
+                    map[i][j] = ".";
+                }
             }
         }
     }
