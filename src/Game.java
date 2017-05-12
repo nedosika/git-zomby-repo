@@ -21,15 +21,30 @@ public class Game {
         player = new Player(name, 10, map.genRndPos(), "Player", "@" );
         clear();
 
-        System.out.println("Привет! " + player.name);
-
         map.render(player);
 
+        System.out.println("Привет! " + player.name);
         System.out.println("Введите команду: ");
         String key = in.nextLine();
 
         while (!key.equals("q")) {
             clear();
+
+            switch (key){
+                case "w":
+                    player.move(new Vec2d(-1, 0));
+                break;
+                case "s":
+                    player.move(new Vec2d(1, 0));
+                break;
+                case "a":
+                    player.move(new Vec2d(0, -1));
+                break;
+                case "d":
+                    player.move(new Vec2d(0, 1));
+                break;
+            }
+
             map.render(player);
             System.out.println("Введите команду: ");
             key = in.nextLine();

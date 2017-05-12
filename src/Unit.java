@@ -20,4 +20,9 @@ public class Unit {
         this.sprite = sprite;
     }
 
+    public void move(Vec2d dir) {
+        this.position.x += dir.x;
+        this.position.y += dir.y;
+    }
+
 }
