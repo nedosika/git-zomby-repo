@@ -16,12 +16,13 @@ public class Game {
         Scanner in = new Scanner(System.in);
         String name = in.nextLine();
 
-        player = new Player(name, 10, new Vec2d(10, 20), "Player" );
+        map = new Map(10, 20);
+
+        player = new Player(name, 10, map.genRndPos(), "Player" );
         clear();
 
         System.out.println("Привет! " + player.name);
 
-        map = new Map(10, 20);
         map.render();
 
         System.out.println("Введите команду: ");
@@ -33,16 +34,15 @@ public class Game {
             System.out.println("Введите команду: ");
             key = in.nextLine();
         }
-
     }
 
     public void clear() {
-        try {
-            if (System.getProperty("os.name").contains("Windows"))
-                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-            else
-                Runtime.getRuntime().exec("clear");
-        } catch (IOException | InterruptedException ex) {
+            try {
+                if (System.getProperty("os.name").contains("Windows"))
+                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                else
+                    Runtime.getRuntime().exec("clear");
+            } catch (IOException | InterruptedException ex) {
         }
     }
 
