@@ -5,6 +5,7 @@ public class Main {
     public static void main(String[] args) {
         //System.out.println("NewHelloWorld");
         Game game = new Game();
-        game.hello();
+        Map map = new Map(10,20);
+        map.print();
     }
 }
