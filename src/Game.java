@@ -1,3 +1,5 @@
+import com.sun.javafx.geom.Vec2d;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -6,21 +8,29 @@ import java.util.Scanner;
  */
 public class Game {
     public Map map;
+    public Player player;
 
     public Game() {
-        System.out.println("Привет!");
+        clear();
+        System.out.print("Добро пожаловать! Введите свое имя: ");
+        Scanner in = new Scanner(System.in);
+        String name = in.nextLine();
+
+        player = new Player(name, 10, new Vec2d(10, 20), "Player" );
+        clear();
+
+        System.out.println("Привет! " + player.name);
 
         map = new Map(10, 20);
         map.render();
 
-        Scanner in = new Scanner(System.in);
-        System.out.println("Введите команду:");
+        System.out.println("Введите команду: ");
         String key = in.nextLine();
 
         while (!key.equals("q")) {
             clear();
             map.render();
-            System.out.println("Введите команду:");
+            System.out.println("Введите команду: ");
             key = in.nextLine();
         }
 

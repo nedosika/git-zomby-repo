@@ -7,7 +7,6 @@ public class Unit {
     public String name;
     public int hp;
     public int level;
-    public int exp;
     public Vec2d position;
     public String type;
 
@@ -15,7 +14,6 @@ public class Unit {
         this.name = name;
         this.hp = hp;
         this.level = 1;
-        this.exp = 0;
         this.position = position;
         this.type = type;
     }
