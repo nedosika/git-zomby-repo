@@ -1,5 +1,6 @@
 import com.sun.javafx.geom.Vec2d;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -8,6 +9,7 @@ import java.util.Scanner;
 public class Game {
     public Map map;
     public Player player;
+    public ArrayList<Rat> enemies;
 
     public Game() {
         clear();
@@ -18,9 +20,13 @@ public class Game {
         map = new Map(20, 40);
 
         player = new Player(name, 10, map.genRndPos(), "Player", "@" );
-        clear();
 
-        map.render(player);
+        enemies = new ArrayList<Rat>();
+        enemies.add(Rat.spawn(map, enemies.size()));
+        //enemies.add(new Rat("Rat01", 100, new Vec2d(10, 10), "Enemy", "r"));
+
+        clear();
+        map.render(player, enemies);
         player.print();
 
         System.out.println("Введите команду: ");
@@ -44,7 +50,7 @@ public class Game {
                 break;
             }
 
-            map.render(player);
+            map.render(player, enemies);
             player.print();
             System.out.println("Введите команду: ");
             key = in.nextLine();

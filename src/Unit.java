@@ -28,6 +28,7 @@ public class Unit {
 
         if (curX >= 0 && curX < map.rows && curY >= 0 && curY < map.cols) {
             if(map.map[curX][curY] == ".") {
+                map.map[(int)(this.position.x)][(int)(this.position.y)] = ".";
                 this.position.x += dir.x;
                 this.position.y += dir.y;
             }
@@ -35,7 +36,7 @@ public class Unit {
     }
 
     public void print(){
-        System.out.println("Имя: " + name + "[" + level + "]" + "HP: " + hp + "/" + max_hp + "pos[" + (int)position.x + "/" + (int)position.y + "]");
+        System.out.println("Имя: " + name + "[" + level + "]" + "HP: " + hp + "/" + max_hp + " pos[" + (int)position.x + "/" + (int)position.y + "]");
     }
 
 }

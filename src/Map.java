@@ -1,5 +1,7 @@
 import com.sun.javafx.geom.Vec2d;
 
+import java.util.ArrayList;
+
 /**
  * Created by Павел on 12.05.2017.
  */
@@ -25,18 +27,25 @@ public class Map {
         }
     }
 
-    public void render(Player player) {
+    public void render(Player player, ArrayList<Rat> enemies) {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 if ( player.position.equals( new Vec2d(i, j) ) ) {
-                    System.out.print(player.sprite);
+                    map[i][j] = player.sprite;
                 }
-                else {
-                    System.out.print(map[i][j]);
+
+                for (Rat enemy: enemies) {
+                    if (enemy.position.equals(new Vec2d(i,j))){
+                        map[i][j] = enemy.sprite;
+                    }
                 }
+
+                System.out.print(map[i][j]);
+
             }
             System.out.println();
         }
+
     }
 
     public Vec2d genRndPos(){
