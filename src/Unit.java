@@ -22,13 +22,20 @@ public class Unit {
         this.sprite = sprite;
     }
 
-    public void move(Vec2d dir) {
-        this.position.x += dir.x;
-        this.position.y += dir.y;
+    public void move(Vec2d dir, Map map) {
+        int curX = (int)(this.position.x + dir.x);
+        int curY = (int)(this.position.y + dir.y);
+
+        if (curX >= 0 && curX < map.rows && curY >= 0 && curY < map.cols) {
+            if(map.map[curX][curY] == ".") {
+                this.position.x += dir.x;
+                this.position.y += dir.y;
+            }
+        }
     }
 
     public void print(){
-        System.out.println("Имя: " + name + "[" + level + "]" + "HP: " + hp + "/" + max_hp);
+        System.out.println("Имя: " + name + "[" + level + "]" + "HP: " + hp + "/" + max_hp + "pos[" + (int)position.x + "/" + (int)position.y + "]");
     }
 
 }

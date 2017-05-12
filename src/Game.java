@@ -1,5 +1,4 @@
 import com.sun.javafx.geom.Vec2d;
-
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -32,16 +31,16 @@ public class Game {
 
             switch (key){
                 case "w":
-                    player.move(new Vec2d(-1, 0));
+                    player.move(new Vec2d(-1, 0), map);
                 break;
                 case "s":
-                    player.move(new Vec2d(1, 0));
+                    player.move(new Vec2d(1, 0), map);
                 break;
                 case "a":
-                    player.move(new Vec2d(0, -1));
+                    player.move(new Vec2d(0, -1), map);
                 break;
                 case "d":
-                    player.move(new Vec2d(0, 1));
+                    player.move(new Vec2d(0, 1), map);
                 break;
             }
 
