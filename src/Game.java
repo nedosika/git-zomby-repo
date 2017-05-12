@@ -22,8 +22,8 @@ public class Game {
         clear();
 
         map.render(player);
+        player.print();
 
-        System.out.println("Привет! " + player.name);
         System.out.println("Введите команду: ");
         String key = in.nextLine();
 
@@ -46,6 +46,7 @@ public class Game {
             }
 
             map.render(player);
+            player.print();
             System.out.println("Введите команду: ");
             key = in.nextLine();
         }
