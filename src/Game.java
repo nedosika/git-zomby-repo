@@ -16,21 +16,21 @@ public class Game {
         Scanner in = new Scanner(System.in);
         String name = in.nextLine();
 
-        map = new Map(10, 20);
+        map = new Map(20, 40);
 
-        player = new Player(name, 10, map.genRndPos(), "Player" );
+        player = new Player(name, 10, map.genRndPos(), "Player", "@" );
         clear();
 
         System.out.println("Привет! " + player.name);
 
-        map.render();
+        map.render(player);
 
         System.out.println("Введите команду: ");
         String key = in.nextLine();
 
         while (!key.equals("q")) {
             clear();
-            map.render();
+            map.render(player);
             System.out.println("Введите команду: ");
             key = in.nextLine();
         }

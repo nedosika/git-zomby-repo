@@ -25,10 +25,15 @@ public class Map {
         }
     }
 
-    public void render(){
-        for (int i = 0; i < rows; i++){
+    public void render(Player player) {
+        for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                System.out.print(map[i][j]);
+                if ( player.position.equals( new Vec2d(i, j) ) ) {
+                    System.out.print(player.sprite);
+                }
+                else {
+                    System.out.print(map[i][j]);
+                }
             }
             System.out.println();
         }

@@ -8,14 +8,16 @@ public class Unit {
     public int hp;
     public int level;
     public Vec2d position;
+    public String sprite;
     public String type;
 
-    public Unit(String name, int hp, Vec2d position, String type){
+    public Unit(String name, int hp, Vec2d position, String type, String sprite){
         this.name = name;
         this.hp = hp;
         this.level = 1;
         this.position = position;
         this.type = type;
+        this.sprite = sprite;
     }
 
 }
