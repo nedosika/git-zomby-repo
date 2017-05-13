@@ -1,5 +1,7 @@
 import com.sun.javafx.geom.Vec2d;
 
+import java.util.ArrayList;
+
 /**
  * Created by Павел on 12.05.2017.
  */
@@ -21,7 +23,7 @@ public class Unit implements IUnit{
         this.sprite = sprite;
     }
 
-    public void move(Vec2d dir, Map map) {
+    public boolean move(Vec2d dir, Map map) {
         int curX = (int)(this.position.x + dir.x);
         int curY = (int)(this.position.y + dir.y);
 
@@ -30,8 +32,19 @@ public class Unit implements IUnit{
                 map.map[(int)(this.position.x)][(int)(this.position.y)] = ".";
                 this.position.x += dir.x;
                 this.position.y += dir.y;
+                return true;
+            }
+            else {
+                return false;
             }
         }
+        else {
+            return false;
+        }
+    }
+
+    public void move(Map map) {
+        move(genRndDir(), map);
     }
 
     public void print(){
@@ -46,10 +59,34 @@ public class Unit implements IUnit{
         return sprite;
     }
 
+    public String getType(){
+        return type;
+    }
+
     public void setPosition(Vec2d position){
         this.position = position;
     }
 
+    static public Vec2d genRndDir(){
+        int rnd = (int)(Math.random() * 4);
+        Vec2d dir = new Vec2d(0,0);
+        switch (rnd){
+            case 0:
+                dir = new Vec2d( 1, 0);
+                break;
+            case 1:
+                dir = new Vec2d( -1, 0);
+                break;
+            case 2:
+                dir =new Vec2d( 0, 1);
+                break;
+            case 3:
+                dir = new Vec2d( 0, -1);
+                break;
+        }
+
+        return dir;
+    }
 
     static public Vec2d spawn(Map map) {
         int x = (int) (Math.random() * map.rows);

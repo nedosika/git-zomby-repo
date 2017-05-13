@@ -20,7 +20,6 @@ public class Game {
         player = new Player(name, 10, "Player", "@", 1 );
         map.addUnit(player);
 
-
         for (int i = 0; i < 10; i++) {
             map.addUnit(new Rat("Rat" + i, 10, "Enemy", "r", 1));
         }
@@ -32,8 +31,6 @@ public class Game {
         String key = in.nextLine();
 
         while (!key.equals("q")) {
-
-
             switch (key){
                 case "w":
                     player.move(new Vec2d(-1, 0), map);
@@ -49,14 +46,18 @@ public class Game {
                 break;
             }
 
+            for (IUnit unit: map.units) {
+                if(unit.getType() == "Enemy"){
+                    unit.move(map);
+                }
+            }
+
             clear();
             map.render();
             player.print();
             System.out.println("Введите команду: ");
             key = in.nextLine();
         }
-
-
     }
 
     public void clear() {
