@@ -27,25 +27,23 @@ public class Map {
         }
     }
 
-    public void render(Player player, ArrayList<Rat> enemies) {
+    public void render(ArrayList<IUnit> units) {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                if ( player.position.equals( new Vec2d(i, j) ) ) {
-                    map[i][j] = (char)27 + "[32m" + player.sprite  + (char)27 + "[0m";
-                }
-
-                for (Rat enemy: enemies) {
-                    if (enemy.position.equals(new Vec2d(i,j))){
-                        map[i][j] = (char)27 + "[31m" + enemy.sprite  + (char)27 + "[0m";
+                for (IUnit unit: units) {
+                    if (unit.getPosition().equals(new Vec2d(i,j))){
+                        if (!unit.getSprite().equals("@")){
+                            map[i][j] = (char)27 + "[31m" + unit.getSprite()  + (char)27 + "[0m";
+                        }
+                        else{
+                            map[i][j] = (char)27 + "[32m" + unit.getSprite()  + (char)27 + "[0m";
+                        }
                     }
                 }
-
                 System.out.print(map[i][j]);
-
             }
             System.out.println();
         }
-
     }
 
     public Vec2d genRndPos(){

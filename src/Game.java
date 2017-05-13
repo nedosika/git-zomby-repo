@@ -9,9 +9,9 @@ import java.util.Scanner;
 public class Game {
     public Map map;
     public Player player;
-    public ArrayList<Rat> enemies;
+    public ArrayList<IUnit> units;
 
-    public Game() {
+    public Game() throws IOException {
         clear();
         System.out.print("Добро пожаловать! Введите свое имя: ");
         Scanner in = new Scanner(System.in);
@@ -21,11 +21,12 @@ public class Game {
 
         player = new Player(name, 10, map.genRndPos(), "Player", "@" );
 
-        enemies = new ArrayList<Rat>();
-        enemies.add(Rat.spawn(map, enemies.size()));
+        units = new ArrayList<IUnit>();
+        units.add(Rat.spawn(map, units.size()));
+        units.add(player);
 
         clear();
-        map.render(player, enemies);
+        map.render(units);
         player.print();
 
         System.out.println("Введите команду: ");
@@ -49,11 +50,13 @@ public class Game {
                 break;
             }
 
-            map.render(player, enemies);
+            map.render(units);
             player.print();
             System.out.println("Введите команду: ");
             key = in.nextLine();
         }
+
+
     }
 
     public void clear() {

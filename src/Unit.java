@@ -3,7 +3,7 @@ import com.sun.javafx.geom.Vec2d;
 /**
  * Created by Павел on 12.05.2017.
  */
-public class Unit {
+public class Unit implements IUnit{
     public String name;
     public int hp;
     public int max_hp;
@@ -37,6 +37,14 @@ public class Unit {
 
     public void print(){
         System.out.println("Имя: " + name + "[" + level + "]" + "HP: " + hp + "/" + max_hp + " pos[" + (int)position.x + "/" + (int)position.y + "]");
+    }
+
+    public Vec2d getPosition(){
+        return position;
+    }
+
+    public String getSprite(){
+        return sprite;
     }
 
 }
