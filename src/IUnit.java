@@ -15,6 +15,6 @@ public interface IUnit {
 
     boolean move(Vec2d dir, Map map);
 
-    void move(Map map);
+    boolean move(Map map);
 
 }

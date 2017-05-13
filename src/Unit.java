@@ -22,14 +22,12 @@ public class Unit implements IUnit {
     }
 
     public boolean move(Vec2d dir, Map map) {
-        int curX = (int)(this.position.x + dir.x);
-        int curY = (int)(this.position.y + dir.y);
+        Vec2d newPos = new Vec2d(position.x + dir.x, position.y + dir.y);
 
-        if (curX >= 0 && curX < map.rows && curY >= 0 && curY < map.cols) {
-            if(map.map[curX][curY] == ".") {
-                map.map[(int)(this.position.x)][(int)(this.position.y)] = ".";
-                this.position.x += dir.x;
-                this.position.y += dir.y;
+        if (newPos.x >= 0 && newPos.x < map.rows && newPos.y >= 0 && newPos.y < map.cols) {
+            if(map.map[(int)newPos.x][(int)newPos.y] == ".") {
+                map.map[(int)(position.x)][(int)(position.y)] = ".";
+                position = newPos;
                 return true;
             }
             else {
@@ -41,8 +39,12 @@ public class Unit implements IUnit {
         }
     }
 
-    public void move(Map map) {
-        move(genRndDir(), map);
+    public boolean move(Map map) {
+
+        while(!move(genRndDir(), map)){
+
+        }
+        return true;
     }
 
     public void print() {
@@ -94,7 +96,6 @@ public class Unit implements IUnit {
                 dir = new Vec2d( -1, 1);
                 break;
         }
-
         return dir;
     }
 }
