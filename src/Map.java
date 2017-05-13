@@ -10,6 +10,8 @@ public class Map {
     int rows;
     int cols;
 
+    public ArrayList<IUnit> units  = new ArrayList<>();
+
     public Map(int rows, int cols){
         this.rows = rows;
         this.cols = cols;
@@ -27,7 +29,7 @@ public class Map {
         }
     }
 
-    public void render(ArrayList<IUnit> units) {
+    public void render() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 for (IUnit unit: units) {
@@ -46,16 +48,24 @@ public class Map {
         }
     }
 
+    public void addUnit(IUnit unit) {
+        addUnit(unit, genRndPos());
+    }
+
+    public void addUnit(IUnit unit, Vec2d position){
+        unit.setPosition(position);
+        units.add(unit);
+    }
+
     public Vec2d genRndPos(){
         int x = (int)(Math.random() * this.rows);
         int y = (int)(Math.random() * this.cols);
 
-        while (map[x][y] == "#"){
+        while (map[x][y] != "." ){
             x = (int)(Math.random() * this.rows);
             y = (int)(Math.random() * this.cols);
         }
 
-        //System.out.println("x="+x+", y="+y);
         return new Vec2d(x, y);
     }
 

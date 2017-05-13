@@ -12,12 +12,11 @@ public class Unit implements IUnit{
     public String sprite;
     public String type;
 
-    public Unit(String name, int max_hp, Vec2d position, String type, String sprite){
+    public Unit(String name, int max_hp, String type, String sprite, int level){
         this.name = name;
         this.hp = max_hp;
         this.max_hp = max_hp;
-        this.level = 1;
-        this.position = position;
+        this.level = level;
         this.type = type;
         this.sprite = sprite;
     }
@@ -45,6 +44,23 @@ public class Unit implements IUnit{
 
     public String getSprite(){
         return sprite;
+    }
+
+    public void setPosition(Vec2d position){
+        this.position = position;
+    }
+
+
+    static public Vec2d spawn(Map map) {
+        int x = (int) (Math.random() * map.rows);
+        int y = (int) (Math.random() * map.cols);
+
+        while (map.map[x][y] != ".") {
+            x = (int) (Math.random() * map.rows);
+            y = (int) (Math.random() * map.cols);
+        }
+
+        return new Vec2d(x, y);
     }
 
 }

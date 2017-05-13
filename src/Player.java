@@ -6,8 +6,8 @@ import com.sun.javafx.geom.Vec2d;
 public class Player extends Unit {
     public int expirience;
 
-    public Player(String name, int max_hp, Vec2d position, String type, String sprite) {
-        super(name, max_hp, position, type, sprite);
+    public Player(String name, int max_hp, String type, String sprite, int level) {
+        super(name, max_hp, type, sprite, level);
         this.expirience = 0;
     }
 }

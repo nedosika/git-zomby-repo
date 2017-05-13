@@ -7,4 +7,6 @@ public interface IUnit {
 
     Vec2d getPosition();
     String getSprite();
+    void setPosition(Vec2d position);
+
 }

@@ -7,9 +7,9 @@ import java.util.Scanner;
  * Created by Павел on 12.05.2017.
  */
 public class Game {
-    public Map map;
+    public Map map = new Map(30, 60);
     public Player player;
-    public ArrayList<IUnit> units;
+
 
     public Game() throws IOException {
         clear();
@@ -17,23 +17,22 @@ public class Game {
         Scanner in = new Scanner(System.in);
         String name = in.nextLine();
 
-        map = new Map(30, 60);
+        player = new Player(name, 10, "Player", "@", 1 );
+        map.addUnit(player);
 
-        player = new Player(name, 10, map.genRndPos(), "Player", "@" );
 
-        units = new ArrayList<IUnit>();
-        units.add(Rat.spawn(map, units.size()));
-        units.add(player);
+        for (int i = 0; i < 10; i++) {
+            map.addUnit(new Rat("Rat" + i, 10, "Enemy", "r", 1));
+        }
 
         clear();
-        map.render(units);
+        map.render();
         player.print();
-
         System.out.println("Введите команду: ");
         String key = in.nextLine();
 
         while (!key.equals("q")) {
-            clear();
+
 
             switch (key){
                 case "w":
@@ -50,7 +49,8 @@ public class Game {
                 break;
             }
 
-            map.render(units);
+            clear();
+            map.render();
             player.print();
             System.out.println("Введите команду: ");
             key = in.nextLine();
