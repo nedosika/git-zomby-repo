@@ -30,20 +30,32 @@ public class Game {
         System.out.println("Введите команду: ");
         String key = in.nextLine();
 
-        while (!key.equals("q")) {
+        while (!key.equals("qq")) {
             switch (key){
                 case "w":
                     player.move(new Vec2d(-1, 0), map);
-                break;
+                    break;
                 case "s":
                     player.move(new Vec2d(1, 0), map);
-                break;
+                    break;
                 case "a":
                     player.move(new Vec2d(0, -1), map);
-                break;
+                    break;
                 case "d":
                     player.move(new Vec2d(0, 1), map);
-                break;
+                    break;
+                case "q":
+                    player.move(new Vec2d(-1, -1), map);
+                    break;
+                case "e":
+                    player.move(new Vec2d(-1, 1), map);
+                    break;
+                case "z":
+                    player.move(new Vec2d(1, -1), map);
+                    break;
+                case "c":
+                    player.move(new Vec2d(1, 1), map);
+                    break;
             }
 
             for (IUnit unit: map.units) {

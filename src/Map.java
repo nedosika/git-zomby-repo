@@ -12,7 +12,7 @@ public class Map {
 
     public ArrayList<IUnit> units  = new ArrayList<>();
 
-    public Map(int rows, int cols){
+    public Map(int rows, int cols) {
         this.rows = rows;
         this.cols = cols;
 
@@ -52,12 +52,12 @@ public class Map {
         addUnit(unit, genRndPos());
     }
 
-    public void addUnit(IUnit unit, Vec2d position){
+    public void addUnit(IUnit unit, Vec2d position) {
         unit.setPosition(position);
         units.add(unit);
     }
 
-    public Vec2d genRndPos(){
+    public Vec2d genRndPos() {
         int x = (int)(Math.random() * this.rows);
         int y = (int)(Math.random() * this.cols);
 
