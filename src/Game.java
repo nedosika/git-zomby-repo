@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Game {
     public Map map = new Map(30, 60);
     public Player player;
-
+    static public ArrayList<String> log = new ArrayList<String>();
 
     public Game() throws IOException {
         clear();
@@ -28,6 +28,12 @@ public class Game {
         clear();
         map.render();
         player.print();
+
+        for (String log: log) {
+            System.out.println(log);
+        }
+        log = new ArrayList<String>();
+
         System.out.println("Введите команду: ");
         String key = in.nextLine();
 
@@ -59,17 +65,29 @@ public class Game {
                     break;
             }
 
-            for (IUnit unit: map.units) {
-                if(unit.getType() == "Enemy"){
-                    unit.move(map);
+            for (int i = 0; i < map.rows; i++) {
+                for (int j = 0; j < map.cols; j++) {
+                    if (map.map[i][j].getType() == "Enemy"){
+                        map.map[i][j].move(map);
+                    }
                 }
             }
 
             clear();
+
             map.render();
             player.print();
+
+            for (String log: log) {
+                System.out.println(log);
+            }
+            log = new ArrayList<String>();
+
             System.out.println("Введите команду: ");
             key = in.nextLine();
+
+
+
         }
     }
 

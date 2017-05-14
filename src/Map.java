@@ -1,16 +1,13 @@
 import com.sun.javafx.geom.Vec2d;
 
-import java.util.ArrayList;
-
 /**
  * Created by Павел on 12.05.2017.
  */
+
 public class Map {
     public IUnit[][] map;
     int rows;
     int cols;
-
-    public ArrayList<IUnit> units  = new ArrayList<>();
 
     public Map(int rows, int cols) {
         this.rows = rows;
@@ -27,6 +24,7 @@ public class Map {
                 }
             }
         }
+
     }
 
     public void render() {
@@ -45,7 +43,6 @@ public class Map {
     public void addUnit(IUnit unit, Vec2d position) {
         unit.setPosition(position);
         map[(int)position.x][(int)position.y] = unit;
-        units.add(unit);
     }
 
     public Vec2d genRndPos() {

@@ -21,16 +21,38 @@ public class Unit implements IUnit {
         this.level = level;
         this.type = type;
         this.sprite = sprite;
+
     }
 
     public boolean move(Vec2d dir, Map map) {
+        IUnit buffer;
+        Vec2d oldPos;
+
         Vec2d newPos = new Vec2d(position.x + dir.x, position.y + dir.y);
-        System.out.println();
+
         if (newPos.x >= 0 && newPos.x < map.rows && newPos.y >= 0 && newPos.y < map.cols) {
-            if(map.map[(int)newPos.x][(int)newPos.y].getSprite() == ".") {
-                map.map[(int)(position.x)][(int)(position.y)] = new Empty();
-                map.map[(int)newPos.x][(int)newPos.y] = this;
-                position = newPos;
+            if(map.map[(int)newPos.x][(int)newPos.y] instanceof Empty) {
+
+                buffer = map.map[(int)newPos.x][(int)newPos.y];
+                buffer.setPosition(new Vec2d(position.x, position.y));
+
+                map.map[(int)newPos.x][(int)newPos.y] = map.map[(int)(position.x)][(int)(position.y)];
+                map.map[(int)newPos.x][(int)newPos.y].setPosition(new Vec2d(newPos.x, newPos.y));
+
+                map.map[(int)(buffer.getPosition().x)][(int)(buffer.getPosition().y)] = buffer;
+
+                //Game.log.add(name + "Ходит " + getPosition() + " -> " + newPos);
+
+/*                buffer = map.map[(int)(position.x)][(int)(position.y)];
+
+                map.map[(int)(position.x)][(int)(position.y)] = map.map[(int)newPos.x][(int)newPos.y];
+
+                map.map[(int)newPos.x][(int)newPos.y] = buffer;
+
+                Game.log.add(name + "Ходит " + buffer.getPosition() + " -> " + position);
+
+                position = newPos;*/
+
                 return true;
             }
             else {
@@ -43,9 +65,10 @@ public class Unit implements IUnit {
     }
 
     public boolean move(Map map) {
-        while(!move(genRndDir(), map)){
+        //while(!move(genRndDir(), map)){
+        //}
 
-        }
+        move(genRndDir(), map);
         return true;
     }
 
