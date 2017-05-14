@@ -58,21 +58,26 @@ public class Map {
         units.add(unit);
     }
 
-    public int getUnitId(Vec2d position){
+
+
+    public IUnit getUnit(Vec2d position){
         for (int i = 0; i < units.size(); i ++ ) {
             if(units.get(i).getPosition() == position){
-                return i;
+
+                return units.get(i);
             }
         }
-        return -1;
-    }
+        return units.get(1);
+     }
+
 
     public void updateUnits() {
         int i = 0;
         while (i < units.size()) {
-            if (units.get(i).getHp() < 0) {
+            if (units.get(i).getHp() <= 0) {
                 map[(int)units.get(i).getPosition().x][(int)units.get(i).getPosition().y] = ".";
-                units.remove(units.get(i));
+                Game.log.add(units.get(i) + " умирет");
+                units.remove(i);
             }
             i++;
         }

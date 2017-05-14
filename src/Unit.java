@@ -30,14 +30,19 @@ public class Unit implements IUnit {
             if(map.map[(int)newPos.x][(int)newPos.y] == ".") {
                 map.map[(int)(position.x)][(int)(position.y)] = ".";
                 map.map[(int)newPos.x][(int)newPos.y] = sprite;
+                Game.log.add(name + "Ходит " + position + " -> " + newPos);
                 position = newPos;
+
                 return true;
             }
             else {
-                if (map.getUnitId(new Vec2d(position.x, position.y)) > 0 ) {
-                    attack(map.units.get(map.getUnitId(new Vec2d(position.x, position.y))));
+                for (IUnit unit: map.units) {
+                    if (unit.getPosition().equals(newPos)){
+                        attack(unit);
+                        return true;
+                    }
                 }
-                return true;
+                return false;
             }
         }
         else {
@@ -54,6 +59,7 @@ public class Unit implements IUnit {
 
     public void attack(IUnit targetUnit){
         targetUnit.addDamage(1);
+        Game.log.add(name + " атакует " + targetUnit.getName());
     }
 
     public void addDamage(int damage){
@@ -66,6 +72,10 @@ public class Unit implements IUnit {
 
     public Vec2d getPosition() {
         return position;
+    }
+
+    public String getName(){
+        return name;
     }
 
     public String getSprite() {

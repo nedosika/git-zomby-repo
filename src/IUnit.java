@@ -23,4 +23,6 @@ public interface IUnit {
 
     void attack(IUnit target);
 
+    String getName();
+
 }

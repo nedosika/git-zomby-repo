@@ -7,8 +7,9 @@ import java.util.Scanner;
  * Created by Павел on 12.05.2017.
  */
 public class Game {
-    public Map map = new Map(30, 60);
+    public Map map = new Map(20, 80);
     public Player player;
+    static public ArrayList<String> log = new ArrayList<String>();
 
 
     public Game() throws IOException {
@@ -21,12 +22,18 @@ public class Game {
         map.addUnit(player);
 
         for (int i = 0; i < 10; i++) {
-            map.addUnit(new Rat("Rat" + i, 10, "Enemy", "r", 1));
+            map.addUnit(new Rat("Rat" + i, 2, "Enemy", "r", 1));
         }
 
         clear();
         map.render();
         player.print();
+
+        for (String log: log) {
+            System.out.println(log);
+        }
+        log = new ArrayList<String>();
+
         System.out.println("Введите команду: ");
         String key = in.nextLine();
 
@@ -60,7 +67,7 @@ public class Game {
 
             for (IUnit unit: map.units) {
                 if(unit.getType() == "Enemy"){
-                    unit.move(map);
+                    //unit.move(map);
                 }
             }
 
@@ -68,6 +75,12 @@ public class Game {
             map.updateUnits();
             map.render();
             player.print();
+
+            for (String log: log) {
+                System.out.println(log);
+            }
+            log = new ArrayList<String>();
+
             System.out.println("Введите команду: ");
             key = in.nextLine();
         }
