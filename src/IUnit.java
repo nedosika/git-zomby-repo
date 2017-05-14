@@ -25,4 +25,10 @@ public interface IUnit {
 
     String getName();
 
+    void setStatus(String status);
+
+    String getStatus();
+
+    int getLevel();
+
 }

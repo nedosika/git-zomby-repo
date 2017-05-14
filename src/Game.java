@@ -18,11 +18,11 @@ public class Game {
         Scanner in = new Scanner(System.in);
         String name = in.nextLine();
 
-        player = new Player(name, 10, "Player", "@", 1 );
+        player = new Player(name, 10, "Player", "@", 1, "Online" );
         map.addUnit(player);
 
         for (int i = 0; i < 10; i++) {
-            map.addUnit(new Rat("Rat" + i, 2, "Enemy", "r", 1));
+            map.addUnit(new Rat("Rat" + i, 2, "Enemy", "r", 1, "Online"));
         }
 
         clear();

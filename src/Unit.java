@@ -1,7 +1,5 @@
 import com.sun.javafx.geom.Vec2d;
 
-import java.util.ArrayList;
-
 /**
  * Created by Павел on 12.05.2017.
  */
@@ -13,14 +11,16 @@ public class Unit implements IUnit {
     public Vec2d position;
     public String sprite;
     public String type;
+    public String status;
 
-    public Unit(String name, int max_hp, String type, String sprite, int level) {
+    public Unit(String name, int max_hp, String type, String sprite, int level, String status) {
         this.name = name;
         this.hp = max_hp;
         this.max_hp = max_hp;
         this.level = level;
         this.type = type;
         this.sprite = sprite;
+        this.status = status;
     }
 
     public boolean move(Vec2d dir, Map map) {
@@ -30,7 +30,7 @@ public class Unit implements IUnit {
             if(map.map[(int)newPos.x][(int)newPos.y] == ".") {
                 map.map[(int)(position.x)][(int)(position.y)] = ".";
                 map.map[(int)newPos.x][(int)newPos.y] = sprite;
-                Game.log.add(name + "Ходит " + position + " -> " + newPos);
+                Game.log.add(name + " Ходит " + position + " -> " + newPos);
                 position = newPos;
 
                 return true;
@@ -59,7 +59,7 @@ public class Unit implements IUnit {
 
     public void attack(IUnit targetUnit){
         targetUnit.addDamage(1);
-        Game.log.add(name + " атакует " + targetUnit.getName());
+        Game.log.add(name + "[" + level + "]" + " атакует " + targetUnit.getName() + "[" + targetUnit.getLevel() + "]" + " HP: -1");
     }
 
     public void addDamage(int damage){
@@ -92,6 +92,18 @@ public class Unit implements IUnit {
 
     public int getHp(){
         return hp;
+    }
+
+    public void setStatus(String status){
+        this.status = status;
+    }
+
+    public String getStatus(){
+        return status;
+    }
+
+    public int getLevel(){
+        return level;
     }
 
     static public Vec2d genRndDir() {

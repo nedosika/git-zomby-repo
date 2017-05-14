@@ -38,7 +38,6 @@ public class Map {
                             map[i][j] = (char)27 + "[31m" + unit.getSprite()  + (char)27 + "[0m";
                         }
                         else{
-
                             map[i][j] = (char)27 + "[32m" + unit.getSprite()  + (char)27 + "[0m";
                         }
                     }
@@ -58,31 +57,18 @@ public class Map {
         units.add(unit);
     }
 
-
-
-    public IUnit getUnit(Vec2d position){
-        for (int i = 0; i < units.size(); i ++ ) {
-            if(units.get(i).getPosition() == position){
-
-                return units.get(i);
-            }
-        }
-        return units.get(1);
-     }
-
-
     public void updateUnits() {
         int i = 0;
         while (i < units.size()) {
             if (units.get(i).getHp() <= 0) {
                 map[(int)units.get(i).getPosition().x][(int)units.get(i).getPosition().y] = ".";
-                Game.log.add(units.get(i) + " умирет");
+                Game.log.add(units.get(i).getName() + " умирет");
                 units.remove(i);
             }
             i++;
         }
-    }
 
+    }
 
     public Vec2d genRndPos() {
         int x = (int)(Math.random() * this.rows);
