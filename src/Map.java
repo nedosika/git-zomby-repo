@@ -57,6 +57,15 @@ public class Map {
         units.add(unit);
     }
 
+    public IUnit getUnit(Vec2d position){
+        for (IUnit unit: units) {
+            if (unit.getPosition() == position){
+                return unit;
+            }
+        }
+        return units[units.size()];
+    }
+
     public Vec2d genRndPos() {
         int x = (int)(Math.random() * this.rows);
         int y = (int)(Math.random() * this.cols);

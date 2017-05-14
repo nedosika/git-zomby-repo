@@ -1,5 +1,7 @@
 import com.sun.javafx.geom.Vec2d;
 
+import java.util.ArrayList;
+
 /**
  * Created by Павел on 12.05.2017.
  */
@@ -27,7 +29,12 @@ public class Unit implements IUnit {
         if (newPos.x >= 0 && newPos.x < map.rows && newPos.y >= 0 && newPos.y < map.cols) {
             if(map.map[(int)newPos.x][(int)newPos.y] == ".") {
                 map.map[(int)(position.x)][(int)(position.y)] = ".";
+                map.map[(int)newPos.x][(int)newPos.y] = sprite;
                 position = newPos;
+                return true;
+            }
+            else if (map.map[(int)newPos.x][(int)newPos.y] == "r") {
+                attack(map.getUnit(new Vec2d(newPos.x, newPos.y)), map.units);
                 return true;
             }
             else {
@@ -40,11 +47,25 @@ public class Unit implements IUnit {
     }
 
     public boolean move(Map map) {
-
         while(!move(genRndDir(), map)){
 
         }
         return true;
+    }
+
+    public void attack(IUnit targetUnit, ArrayList map){
+        targetUnit.addDamage(1, map);
+    }
+
+    public void addDamage(int damage, ArrayList map){
+        hp -= damage;
+        if (hp <= 0){
+            destroy(map);
+        }
+    }
+
+    public void destroy(ArrayList map){
+        map.remove(this);
     }
 
     public void print() {
