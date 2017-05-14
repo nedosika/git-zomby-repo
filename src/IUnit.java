@@ -1,7 +1,5 @@
 import com.sun.javafx.geom.Vec2d;
 
-import java.util.ArrayList;
-
 /**
  * Created by nedos on 13.05.2017.
  */
@@ -19,8 +17,10 @@ public interface IUnit {
 
     boolean move(Map map);
 
-    void addDamage(int damage, ArrayList map);
+    void addDamage(int damage);
 
-    void attack(IUnit target, ArrayList map);
+    int getHp();
+
+    void attack(IUnit target);
 
 }

@@ -33,12 +33,11 @@ public class Unit implements IUnit {
                 position = newPos;
                 return true;
             }
-            else if (map.map[(int)newPos.x][(int)newPos.y] == "r") {
-                attack(map.getUnit(new Vec2d(newPos.x, newPos.y)), map.units);
-                return true;
-            }
             else {
-                return false;
+                if (map.getUnitId(new Vec2d(position.x, position.y)) > 0 ) {
+                    attack(map.units.get(map.getUnitId(new Vec2d(position.x, position.y))));
+                }
+                return true;
             }
         }
         else {
@@ -53,19 +52,12 @@ public class Unit implements IUnit {
         return true;
     }
 
-    public void attack(IUnit targetUnit, ArrayList map){
-        targetUnit.addDamage(1, map);
+    public void attack(IUnit targetUnit){
+        targetUnit.addDamage(1);
     }
 
-    public void addDamage(int damage, ArrayList map){
+    public void addDamage(int damage){
         hp -= damage;
-        if (hp <= 0){
-            destroy(map);
-        }
-    }
-
-    public void destroy(ArrayList map){
-        map.remove(this);
     }
 
     public void print() {
@@ -86,6 +78,10 @@ public class Unit implements IUnit {
 
     public void setPosition(Vec2d position) {
         this.position = position;
+    }
+
+    public int getHp(){
+        return hp;
     }
 
     static public Vec2d genRndDir() {

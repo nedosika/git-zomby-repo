@@ -33,11 +33,12 @@ public class Map {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 for (IUnit unit: units) {
-                    if (unit.getPosition().equals(new Vec2d(i,j))){
+                    if (unit.getPosition().equals(new Vec2d(i, j))){
                         if (!unit.getSprite().equals("@")){
                             map[i][j] = (char)27 + "[31m" + unit.getSprite()  + (char)27 + "[0m";
                         }
                         else{
+
                             map[i][j] = (char)27 + "[32m" + unit.getSprite()  + (char)27 + "[0m";
                         }
                     }
@@ -57,14 +58,26 @@ public class Map {
         units.add(unit);
     }
 
-    public IUnit getUnit(Vec2d position){
-        for (IUnit unit: units) {
-            if (unit.getPosition() == position){
-                return unit;
+    public int getUnitId(Vec2d position){
+        for (int i = 0; i < units.size(); i ++ ) {
+            if(units.get(i).getPosition() == position){
+                return i;
             }
         }
-        return units[units.size()];
+        return -1;
     }
+
+    public void updateUnits() {
+        int i = 0;
+        while (i < units.size()) {
+            if (units.get(i).getHp() < 0) {
+                map[(int)units.get(i).getPosition().x][(int)units.get(i).getPosition().y] = ".";
+                units.remove(units.get(i));
+            }
+            i++;
+        }
+    }
+
 
     public Vec2d genRndPos() {
         int x = (int)(Math.random() * this.rows);

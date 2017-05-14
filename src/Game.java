@@ -65,6 +65,7 @@ public class Game {
             }
 
             clear();
+            map.updateUnits();
             map.render();
             player.print();
             System.out.println("Введите команду: ");
