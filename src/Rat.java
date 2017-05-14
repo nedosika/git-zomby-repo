@@ -5,8 +5,8 @@ import com.sun.javafx.geom.Vec2d;
  */
 public class Rat extends Unit {
 
-    public Rat(String name, int max_hp, String type, String sprite, int level) {
-        super(name, max_hp, type, sprite, level);
+    public Rat(String name, int max_hp, String type, int level) {
+        super(name, max_hp, type, (char)27 + "[31m" + "r" + (char)27 + "[0m", level);
     }
 
 }

@@ -25,16 +25,12 @@ public class Unit implements IUnit {
 
     public boolean move(Vec2d dir, Map map) {
         Vec2d newPos = new Vec2d(position.x + dir.x, position.y + dir.y);
-
+        System.out.println();
         if (newPos.x >= 0 && newPos.x < map.rows && newPos.y >= 0 && newPos.y < map.cols) {
-            if(map.map[(int)newPos.x][(int)newPos.y] == ".") {
-                map.map[(int)(position.x)][(int)(position.y)] = ".";
-                map.map[(int)newPos.x][(int)newPos.y] = sprite;
+            if(map.map[(int)newPos.x][(int)newPos.y].getSprite() == ".") {
+                map.map[(int)(position.x)][(int)(position.y)] = new Empty();
+                map.map[(int)newPos.x][(int)newPos.y] = this;
                 position = newPos;
-                return true;
-            }
-            else if (map.map[(int)newPos.x][(int)newPos.y] == "r") {
-                attack(map.getUnit(new Vec2d(newPos.x, newPos.y)), map.units);
                 return true;
             }
             else {

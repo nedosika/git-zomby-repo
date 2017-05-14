@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Created by Павел on 12.05.2017.
  */
 public class Map {
-    public String[][] map;
+    public IUnit[][] map;
     int rows;
     int cols;
 
@@ -16,14 +16,14 @@ public class Map {
         this.rows = rows;
         this.cols = cols;
 
-        map = new String[rows][cols];
+        map = new IUnit[rows][cols];
         for (int i = 0; i < rows; i++){
             for (int j = 0; j < cols; j++) {
                 if (Math.random() > 0.8){
-                    map[i][j] = "#";
+                    map[i][j] = new Wall();
                 }
                 else{
-                    map[i][j] = ".";
+                    map[i][j] = new Empty();
                 }
             }
         }
@@ -32,17 +32,7 @@ public class Map {
     public void render() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                for (IUnit unit: units) {
-                    if (unit.getPosition().equals(new Vec2d(i,j))){
-                        if (!unit.getSprite().equals("@")){
-                            map[i][j] = (char)27 + "[31m" + unit.getSprite()  + (char)27 + "[0m";
-                        }
-                        else{
-                            map[i][j] = (char)27 + "[32m" + unit.getSprite()  + (char)27 + "[0m";
-                        }
-                    }
-                }
-                System.out.print(map[i][j]);
+                System.out.print(map[i][j].getSprite());
             }
             System.out.println();
         }
@@ -54,23 +44,15 @@ public class Map {
 
     public void addUnit(IUnit unit, Vec2d position) {
         unit.setPosition(position);
+        map[(int)position.x][(int)position.y] = unit;
         units.add(unit);
-    }
-
-    public IUnit getUnit(Vec2d position){
-        for (IUnit unit: units) {
-            if (unit.getPosition() == position){
-                return unit;
-            }
-        }
-        return units[units.size()];
     }
 
     public Vec2d genRndPos() {
         int x = (int)(Math.random() * this.rows);
         int y = (int)(Math.random() * this.cols);
 
-        while (map[x][y] != "." ){
+        while (!(map[x][y] instanceof Empty)){
             x = (int)(Math.random() * this.rows);
             y = (int)(Math.random() * this.cols);
         }
