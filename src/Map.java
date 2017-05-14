@@ -67,7 +67,6 @@ public class Map {
             }
             i++;
         }
-
     }
 
     public Vec2d genRndPos() {

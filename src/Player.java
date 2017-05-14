@@ -11,4 +11,5 @@ public class Player extends Unit {
         this.expirience = 0;
         Game.log.add(name + " вошел в бой");
     }
+
 }

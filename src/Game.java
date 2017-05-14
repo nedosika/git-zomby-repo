@@ -32,7 +32,7 @@ public class Game {
         for (String log: log) {
             System.out.println(log);
         }
-        log = new ArrayList<String>();
+        log = new ArrayList<>();
 
         System.out.println("Введите команду: ");
         String key = in.nextLine();
@@ -67,19 +67,26 @@ public class Game {
 
             for (IUnit unit: map.units) {
                 if(unit.getType() == "Enemy"){
-                    //unit.move(map);
+                    unit.move(map);
                 }
             }
 
             clear();
             map.updateUnits();
             map.render();
+
             player.print();
 
             for (String log: log) {
                 System.out.println(log);
             }
             log = new ArrayList<String>();
+
+            if (player.hp <= 0 ){
+                clear();
+                System.out.println("GAME OVER");
+                break;
+            }
 
             System.out.println("Введите команду: ");
             key = in.nextLine();
